@@ -21,7 +21,7 @@ For the stack I will be using the below architecture for the services to interac
 The infrastructure resources required for the three Docker services, can be launched as a stack using a Cloudformation template. I have included the template in the Github repo. That template can be used to launch a Cloudformation stack which will provision the necessary networking resources and the Instances.Once the instances are launched, latest Docker need to be installed on the instances and the Docker service need to be started.  
 
 ## Prepare Individual Components  
-Below we will prepare two services Elasticsearch and Kibana, as Docker services, separately beofore merging them in a single Docker-compose file.  
+Below we will prepare two services Elasticsearch and Kibana, as Docker services, separately before merging them in a single Docker-compose file.  
 
  ### Elasticsearch  
  Below is the Docker compose snippet which will launch an Elasticsearch Docker service. 
@@ -84,7 +84,7 @@ To test the service, below command can executed. Make sure this is executed in a
 docker-compose up
 ```
 
-If this service is launched standalone then thre will be errors since Elastic search wont be available. To check if the service is launched successfully, check the Docker launch console outputs. There will be errors showing that it cannot find the Elasticsearch service. That is normal as we dont have the Elasticsearch yet. 
+If this service is launched standalone then there will be errors since Elastic search wont be available. To check if the service is launched successfully, check the Docker launch console outputs. There will be errors showing that it cannot find the Elasticsearch service. That is normal as we dont have the Elasticsearch yet. 
 
 ## Deploy the Stack to Docker Swarm  
 Now that we have tested the services separately, next we will be deploying both of the services as a stack to Docker swarm.First step is to initialize the swarm mode. Run the following command on the instance which is supposed to be the manager node:  
