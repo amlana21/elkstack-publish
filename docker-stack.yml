@@ -1,0 +1,35 @@
+version: '3.1'
+
+services:
+  elasticsearch:
+    image: awsacdev/custom-elasticsearch:1.0
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "ELASTIC_PASSWORD=myesPassword"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - esnet
+
+  kibana:
+    image: awsacdev/custom-kibana:1.0
+    environment:
+      - SERVER_NAME=kibana.local
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    ports:
+      - 5601:5601
+    networks:
+      - esnet
+
+
+volumes:
+  esdata:
+    driver: local
+
+networks:
+  esnet:
