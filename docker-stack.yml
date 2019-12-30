@@ -18,11 +18,25 @@ services:
 
   kibana:
     image: awsacdev/custom-kibana:1.0
+    depends_on:
+      - elasticsearch
     environment:
       - SERVER_NAME=kibana.local
       - ELASTICSEARCH_URL=http://elasticsearch:9200
     ports:
       - 5601:5601
+    networks:
+      - esnet
+  
+  logstash:
+    image: awsacdev/custom-logstash:1.0
+    depends_on:
+      - elasticsearch
+    ports:
+      - 5044:5044
+    volumes:
+      - ~/testdata:/usr/share/logstash/logdata
+    user: root:root  
     networks:
       - esnet
 

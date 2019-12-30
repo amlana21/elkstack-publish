@@ -53,7 +53,7 @@
             }
 
         },
-        "LabEC2_1":{
+        "LabEC21":{
             "Type": "AWS::EC2::Instance",
             "DependsOn":"LabVpc",
             "Properties":{
@@ -139,6 +139,30 @@
                         "CidrIp":"0.0.0.0/0",
                         "ToPort":"2377",
                         "FromPort":"2377"
+                    },
+                    {
+                        "IpProtocol":"tcp",
+                        "CidrIp":"0.0.0.0/0",
+                        "ToPort":"5601",
+                        "FromPort":"5601"
+                    },
+                    {
+                        "IpProtocol":"tcp",
+                        "CidrIp":"0.0.0.0/0",
+                        "ToPort":"9200",
+                        "FromPort":"9200"
+                    },
+                    {
+                        "IpProtocol":"tcp",
+                        "CidrIp":"0.0.0.0/0",
+                        "ToPort":"9300",
+                        "FromPort":"9300"
+                    },
+                    {
+                        "IpProtocol":"tcp",
+                        "CidrIp":"0.0.0.0/0",
+                        "ToPort":"5044",
+                        "FromPort":"5044"
                     }
                 ],
                 "SecurityGroupEgress":[
@@ -342,6 +366,58 @@
                 "CidrBlock":"0.0.0.0/0",
                 "Egress":false,
                 "PortRange":{"From":"2377","To":"2377"},
+                "NetworkAclId":{"Ref":"LabPublicNACL"},
+                "Protocol":"6",
+                "RuleAction":"allow"
+            }
+        },
+        "PublicNACL1Entry8":{
+            "Type":"AWS::EC2::NetworkAclEntry",
+            "DependsOn":"LabPublicNACL",
+            "Properties":{
+                "RuleNumber":"80",
+                "CidrBlock":"0.0.0.0/0",
+                "Egress":false,
+                "PortRange":{"From":"5601","To":"5601"},
+                "NetworkAclId":{"Ref":"LabPublicNACL"},
+                "Protocol":"6",
+                "RuleAction":"allow"
+            }
+        },
+        "PublicNACL1Entry9":{
+            "Type":"AWS::EC2::NetworkAclEntry",
+            "DependsOn":"LabPublicNACL",
+            "Properties":{
+                "RuleNumber":"90",
+                "CidrBlock":"0.0.0.0/0",
+                "Egress":false,
+                "PortRange":{"From":"9200","To":"9200"},
+                "NetworkAclId":{"Ref":"LabPublicNACL"},
+                "Protocol":"6",
+                "RuleAction":"allow"
+            }
+        },
+        "PublicNACL1Entry10":{
+            "Type":"AWS::EC2::NetworkAclEntry",
+            "DependsOn":"LabPublicNACL",
+            "Properties":{
+                "RuleNumber":"100",
+                "CidrBlock":"0.0.0.0/0",
+                "Egress":false,
+                "PortRange":{"From":"9300","To":"9300"},
+                "NetworkAclId":{"Ref":"LabPublicNACL"},
+                "Protocol":"6",
+                "RuleAction":"allow"
+            }
+        },
+        "PublicNACL1Entry11":{
+            "Type":"AWS::EC2::NetworkAclEntry",
+            "DependsOn":"LabPublicNACL",
+            "Properties":{
+                "RuleNumber":"110",
+                "CidrBlock":"0.0.0.0/0",
+                "Egress":false,
+                "PortRange":{"From":"5044","To":"5044"},
                 "NetworkAclId":{"Ref":"LabPublicNACL"},
                 "Protocol":"6",
                 "RuleAction":"allow"
